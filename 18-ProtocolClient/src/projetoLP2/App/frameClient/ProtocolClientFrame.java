@@ -139,34 +139,26 @@ public class ProtocolClientFrame extends javax.swing.JFrame {
 
         Set<String> NamesC = protocol.getSetOn(); //uma set de string para recuperar quem ta on
 
-        // proNames.remove(protocol.getNome()); //serve para remover o proprio nome da lista. como o cluente n ve outro cliente, então tando faz
-        //String[] array = (String[]) NamesC.toArray(new String[NamesC.size()]);//o jlist so aceita um array
-        //faz o array ter exatamente o mesmo tamanho do das strings
-        //String[] clientes = new String[1];
-        Vector<String> clientesDin = new Vector<>();
+        Vector<String> clientes = new Vector<>();
         int i = 0;
         for (String filtrado : NamesC){
             if (!filtrado.contains("***")){
-                clientesDin.add(filtrado);
+                clientes.add(filtrado);
                 i++;
             }
         }
         
-        String[] locais = new String[1];
+        Vector<String> locais = new Vector<>();
         i = 0;
         for (String filtrado : NamesC){
             if (filtrado.contains("***")){
-                locais[i] = filtrado;
+                locais.add(filtrado);
                 i++;
             }
         }
-        
-        //clientes = (String[]) clientesDin.toArray();
-        
-        this.listOnlines.setListData(clientesDin);
 
         //↓ propriedades usadas no jList para seu funcionamento
-        //this.listOnlines.setListData(clientes); //passar o array para o jList
+        this.listOnlines.setListData(clientes); //passar o array para o jList
         this.listOnlines.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); //serve para aceitar ser um nome selecionado, sem isso era possivel selecionar vários
         this.listOnlines.setLayoutOrientation(JList.VERTICAL); //organiza os nomes verticalmente
         this.listOnlines1.setListData(locais); //passar o array para o jList
@@ -367,8 +359,6 @@ public class ProtocolClientFrame extends javax.swing.JFrame {
 
         jPanel1.getAccessibleContext().setAccessibleName("");
 
-        jPanelChat.setPreferredSize(null);
-
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         listOnlines1.setBackground(new java.awt.Color(204, 255, 204));
@@ -502,7 +492,7 @@ public class ProtocolClientFrame extends javax.swing.JFrame {
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(14, Short.MAX_VALUE))
         );

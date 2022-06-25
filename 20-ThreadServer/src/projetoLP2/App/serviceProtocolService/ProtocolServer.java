@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,13 +43,15 @@ public class ProtocolServer {
     aplicação cliente, todos os usuarios que estão conectados no chat*/
     public ProtocolServer() { //método construtor
         try {
+            Executor pool = Executors.newCachedThreadPool();
             s = new ServerSocket(1234); //inicia o objeto com sua porta
 
             System.out.println("Servidor Online"); //printa no servidor
             System.out.println("Aguardando conexões");
             while (true) { //executa enquanto o server está online
                 ns = s.accept(); //inicia o socket
-                new Thread(new Server(ns)).start(); //inicia a Thread na Runnable e passa como parametro o socket.
+                // pool de threads para gerenciar as interações com cada usuário
+                pool.execute(new Server(ns)); // novo Server dedicado a lidar com o novo usuário
                 //sempre que um novo usuario se conecta, se cria uma nova e dois objetos output são criados pra esse cliente
             }
         } catch (IOException ex) {
